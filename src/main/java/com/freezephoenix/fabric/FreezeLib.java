@@ -21,6 +21,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import org.jspecify.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,6 +33,7 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+@SuppressWarnings("unused")
 public class FreezeLib implements ModInitializer {
 	public record BetterBlockEntity<B extends Block & BetterBlock<E>, E extends BlockEntity>(B block, BlockEntityType<E> entity) {}
 	public record FreezeTab(Supplier<ItemLike> icon, Collection<ItemLike> items) {
@@ -103,7 +105,7 @@ public class FreezeLib implements ModInitializer {
 		return new_item;
 	}
 
-	public static FreezeTab registerCreativeTab(String modId, Supplier<ItemLike> icon) {
+	public static @Nullable FreezeTab registerCreativeTab(String modId, Supplier<ItemLike> icon) {
 		return CREATIVE_TABS.putIfAbsent(modId, new FreezeTab(icon));
 	}
 
@@ -115,6 +117,7 @@ public class FreezeLib implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		CREATIVE_TABS.forEach((modId, freezeTab) -> {
+			System.out.println(modId);
 			Registry.register(
 			BuiltInRegistries.CREATIVE_MODE_TAB,
 					Identifier.fromNamespaceAndPath(modId, "item_group"),

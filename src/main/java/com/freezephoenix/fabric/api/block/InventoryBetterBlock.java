@@ -11,6 +11,7 @@ import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 
+@SuppressWarnings("unused")
 public abstract class InventoryBetterBlock<E extends InventoryBetterBlockEntity<E>> extends BaseEntityBlock implements BetterBlock<E> {
 	public InventoryBetterBlock(Properties settings) {
 		super(settings);

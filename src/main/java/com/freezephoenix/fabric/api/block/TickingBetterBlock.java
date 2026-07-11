@@ -10,7 +10,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jspecify.annotations.Nullable;
 
-
+@SuppressWarnings("unused")
 public interface TickingBetterBlock<E extends BlockEntity & TickingBetterBlockEntity> extends BetterBlock<E>, EntityBlock {
 	@Override
 	default <T extends BlockEntity> @Nullable BlockEntityTicker<T> getTicker(Level world, BlockState state, BlockEntityType<T> actual) {

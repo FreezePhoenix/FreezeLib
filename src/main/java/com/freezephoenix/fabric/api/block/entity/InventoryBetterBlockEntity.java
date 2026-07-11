@@ -33,6 +33,7 @@ public abstract class InventoryBetterBlockEntity<T extends InventoryBetterBlockE
 	protected void loadAdditional(ValueInput view) {
 		super.loadAdditional(view);
 		if (!this.tryLoadLootTable(view)) {
+			inventory.clear();
 			ContainerHelper.loadAllItems(view, inventory);
 		}
 	}

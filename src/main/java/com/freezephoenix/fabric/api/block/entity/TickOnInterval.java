@@ -7,6 +7,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 
+@SuppressWarnings("unused")
 public abstract class TickOnInterval<T extends TickOnInterval<T>> extends InventoryBetterBlockEntity<T> implements TickingBetterBlockEntity {
 	private static final String COOLDOWN_ID = "TickOnInterval::cooldown";
 	private int cooldown = 0;

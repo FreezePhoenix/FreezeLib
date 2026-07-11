@@ -8,7 +8,7 @@
 		"FreezePhoenix"
 	],
 	"contact": {},
-	"license": "CC0-1.0",
+	"license": "ARR",
 	"icon": "assets/freezelib/icon.png",
 	"environment": "*",
 	"entrypoints": {

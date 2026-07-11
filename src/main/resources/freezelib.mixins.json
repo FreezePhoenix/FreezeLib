@@ -1,0 +1,13 @@
+{
+	"required": true,
+	"minVersion": "0.8",
+	"package": "com.freezephoenix.fabric.mixin",
+	"compatibilityLevel": "JAVA_21",
+	"mixins": [
+		"BaseEntityBlockAccessor"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	},
+	"mixinextras": {"minVersion": "0.5.4"}
+}

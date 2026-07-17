@@ -117,7 +117,6 @@ public class FreezeLib implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		CREATIVE_TABS.forEach((modId, freezeTab) -> {
-			System.out.println(modId);
 			Registry.register(
 			BuiltInRegistries.CREATIVE_MODE_TAB,
 					Identifier.fromNamespaceAndPath(modId, "item_group"),

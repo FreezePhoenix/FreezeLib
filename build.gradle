@@ -27,7 +27,7 @@ dependencies {
 
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
-	implementation include ("io.github.cottonmc:LibGui:17.0.0+26.2")
+	api include ("io.github.cottonmc:LibGui:17.0.0+26.2")
 
 	api "maven.modrinth:modmenu:20.0.0-beta.2"
 }

@@ -36,14 +36,32 @@ import java.util.function.Supplier;
 @SuppressWarnings("unused")
 public class FreezeLib implements ModInitializer {
 	public record BetterBlockEntity<B extends Block & BetterBlock<E>, E extends BlockEntity>(B block, BlockEntityType<E> entity) {}
-	public record FreezeTab(Supplier<ItemLike> icon, Collection<ItemLike> items) {
-		public FreezeTab(Supplier<ItemLike> icon) {
-			this(icon, new ArrayList<>());
+	public record FreezeTab(String id, Supplier<ItemLike> icon, Collection<ItemLike> items) {
+		public FreezeTab(String id, Supplier<ItemLike> icon) {
+			this(id, icon, new ArrayList<>());
 		}
+		public void register() {
+			Registry.register(
+					BuiltInRegistries.CREATIVE_MODE_TAB,
+					Identifier.fromNamespaceAndPath(id, "item_group"),
+					FabricCreativeModeTab.builder()
+										 .icon(() -> new ItemStack(
+												 icon.get()))
+										 .title(Component.translatable(id + ".item_group"))
+										 .displayItems((_, entries) -> {
+											 for (ItemLike itemLike : items) {
+												 entries.accept(itemLike);
+											 }
+										 })
+										 .build()
+					);
+		}
+
+
 	}
 	public static final String MOD_ID = "freezelib";
 
-	public static final Map<String, FreezeTab> CREATIVE_TABS = new HashMap<>();
+	private static final Map<String, FreezeTab> CREATIVE_TABS = new HashMap<>();
 
 	public static <B extends Block> B registerBlock(final BlockItemId ID, final Function<BlockBehaviour.Properties, B> factory, final Block template) {
 		ResourceKey<Block> blockRegistryKey = ID.block();
@@ -105,8 +123,10 @@ public class FreezeLib implements ModInitializer {
 		return new_item;
 	}
 
-	public static @Nullable FreezeTab registerCreativeTab(String modId, Supplier<ItemLike> icon) {
-		return CREATIVE_TABS.putIfAbsent(modId, new FreezeTab(icon));
+	public static FreezeTab registerCreativeTab(String modId, Supplier<ItemLike> icon) {
+		var value = new FreezeTab(modId, icon);
+		CREATIVE_TABS.put(modId, value);
+		return value;
 	}
 
 	// This logger is used to write text to the console and the log file.
@@ -116,21 +136,5 @@ public class FreezeLib implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		CREATIVE_TABS.forEach((modId, freezeTab) -> {
-			Registry.register(
-			BuiltInRegistries.CREATIVE_MODE_TAB,
-					Identifier.fromNamespaceAndPath(modId, "item_group"),
-					FabricCreativeModeTab.builder()
-										 .icon(() -> new ItemStack(
-												 freezeTab.icon.get()))
-										 .title(Component.translatable(modId + ".item_group"))
-										 .displayItems((_, entries) -> {
-											 for (ItemLike itemLike : freezeTab.items()) {
-												 entries.accept(itemLike);
-											 }
-										 })
-										 .build()
-			);
-		});
 	}
 }

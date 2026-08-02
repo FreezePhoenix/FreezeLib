@@ -16,6 +16,13 @@
 			"com.freezephoenix.fabric.FreezeLib"
 		]
 	},
+	"custom": {
+		"modmenu": {
+			"badges": [
+				"library"
+			]
+		}
+	},
 	"mixins": [
 		"freezelib.mixins.json"
 	],

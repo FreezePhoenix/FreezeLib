@@ -1,4 +1,4 @@
-package com.freezephoenix.fabric.gui;
+package com.freezephoenix.fabric.client.gui;
 
 import io.github.cottonmc.cotton.gui.SyncedGuiDescription;
 import io.github.cottonmc.cotton.gui.client.CottonInventoryScreen;
